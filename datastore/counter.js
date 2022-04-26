@@ -40,6 +40,7 @@ const writeCounter = (count, callback) => {
 
 exports.getNextUniqueId = (callback) => {
   readCounter((err, fileNum) => {
+    console.log(__dirname);
     counter = fileNum;
     counter = counter + 1;
     writeCounter(counter, callback);
