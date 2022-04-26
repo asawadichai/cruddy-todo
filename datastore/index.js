@@ -18,17 +18,34 @@ exports.create = (text, callback) => {
       }
     });
   });
-
-  // var id = counter.getNextUniqueId();
-  // items[id] = text;
-  // callback(null, { id, text });
 };
 
 exports.readAll = (callback) => {
-  var data = _.map(items, (text, id) => {
-    return { id, text };
+  //var result = [];
+  fs.readdir(exports.dataDir, (err, files) => {
+    if (err) {
+      callback(null, []);
+    } else {
+      var data = _.map(files, (text) => {
+        //console.log('this is id', id);
+        console.log('this is our files', files);
+        var id = text.slice(0, 5);
+        var text = text.slice(0, 5);
+        return {id, text};
+      });
+      callback(null, data);
+    }
   });
-  callback(null, data);
+
+
+
+
+
+
+  // var data = _.map(items, (text, id) => {
+  //   return { id, text };
+  // });
+  // callback(null, data);
 };
 
 exports.readOne = (id, callback) => {
